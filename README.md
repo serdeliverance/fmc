@@ -31,3 +31,11 @@
 3. Run tests to make sure everything works
 
 4. Add `Akka Streams` library for stream processing
+
+#########################
+
+Detalle
+
+Se plantea una arquitectura Event Sourcing, separando comandos, de eventos de estado.
+
+Se definieron dichos comandos con sus correspondientes unit tests siguiendo un approach TDD. Dichos componentes fueron definidos en la capa de domain
