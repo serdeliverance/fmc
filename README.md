@@ -45,4 +45,4 @@ Se definieron dichos comandos con sus correspondientes unit tests siguiendo un a
 TODO
 ##############
 
-cambiar la organizacion de paquetes en sbt
+cambiar la organizacion de dependencias a algo mas simple en el build.sbt
