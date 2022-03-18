@@ -1,10 +1,17 @@
-val scala3Version = "3.1.1"
+name := "maze"
 
-lazy val root = project
-  .in(file("."))
-  .settings(
-    name := "maze",
-    version := "0.1.0-SNAPSHOT",
-    scalaVersion := scala3Version,
-    libraryDependencies += "com.github.sbt" % "junit-interface" % "0.13.3" % Test,
-  )
+scalaVersion := "3.1.0"
+
+val AkkaVersion = "2.6.18"
+
+val compileDependencies = Seq(
+  ("com.typesafe.akka" %% "akka-stream" % AkkaVersion).cross(CrossVersion.for3Use2_13)
+).map(_ % Compile)
+
+val testDependencies = Seq(
+  "org.scalatest" %% "scalatest" % "3.2.11",
+  ("com.typesafe.akka" %% "akka-stream-testkit" % AkkaVersion)
+    .cross(CrossVersion.for3Use2_13),
+).map(_ % Test)
+
+libraryDependencies ++= compileDependencies ++ testDependencies
