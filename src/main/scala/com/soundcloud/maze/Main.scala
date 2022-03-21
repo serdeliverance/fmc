@@ -1,17 +1,22 @@
 package com.soundcloud.maze
 
+import akka.NotUsed
+import akka.actor.ActorSystem
+import akka.stream.scaladsl.{ Flow, Tcp }
+import akka.stream.scaladsl.Tcp.ServerBinding
+import akka.util.ByteString
 import com.soundcloud.maze.common.kafka.kafkaProducer
 import com.typesafe.config.ConfigFactory
 
 import java.io._
 import java.net.{ ServerSocket, Socket }
+import scala.collection.JavaConverters._
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.concurrent.duration.Duration
 import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.io.Source
 import scala.util.Try
-import scala.collection.JavaConverters._
 
 object Main {
 
@@ -146,5 +151,19 @@ object MainV2 {
   val config   = ConfigFactory.load()
   val producer = kafkaProducer(config)
 
-  // TODO configure TCP server
+  // TCP server
+  val host = "127.0.0.1"
+  val port = 8088
+
+  implicit val system = ActorSystem("actor-system")
+
+  val eventChannelConnections =
+    Tcp().bind(host, port)
+
+  // TODO
+  val eventConnectionHandler: Flow[ByteString, ByteString, NotUsed] = ???
+
+  eventChannelConnections.runForeach { connection =>
+    connection.handleWith(eventConnectionHandler)
+  }
 }
