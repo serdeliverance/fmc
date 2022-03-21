@@ -1,20 +1,21 @@
 package com.soundcloud.maze
 
-import java.io._
-import java.net.{ServerSocket, Socket}
+import com.soundcloud.maze.common.kafka.kafkaProducer
+import com.typesafe.config.ConfigFactory
 
+import java.io._
+import java.net.{ ServerSocket, Socket }
 import scala.collection.concurrent.TrieMap
 import scala.collection.mutable
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext, Future}
+import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.io.Source
 import scala.util.Try
-
 import scala.collection.JavaConverters._
 
 object Main {
 
-  private val EventPort = 9090
+  private val EventPort  = 9090
   private val ClientPort = 9099
 
   private var lastSeqNo = 0L
@@ -24,7 +25,7 @@ object Main {
     val clientPool = new TrieMap[Long, Socket]
 
     val messagesBySeqNo = new mutable.HashMap[Long, List[String]]
-    val followRegistry = new mutable.HashMap[Long, Set[Long]]
+    val followRegistry  = new mutable.HashMap[Long, Set[Long]]
 
     implicit val ec = ExecutionContext.global
 
@@ -49,14 +50,14 @@ object Main {
               messagesBySeqNo -= lastSeqNo + 1L
 
               val nextPayload = nextMessage.mkString("|")
-              val seqNo = nextMessage(0).toLong
-              val kind = nextMessage(1)
+              val seqNo       = nextMessage(0).toLong
+              val kind        = nextMessage(1)
 
               kind match {
                 case "F" =>
-                  val fromUserId = nextMessage(2).toLong
-                  val toUserId = nextMessage(3).toLong
-                  val followers = followRegistry.getOrElse(toUserId, Set.empty)
+                  val fromUserId   = nextMessage(2).toLong
+                  val toUserId     = nextMessage(3).toLong
+                  val followers    = followRegistry.getOrElse(toUserId, Set.empty)
                   val newFollowers = followers + fromUserId
 
                   followRegistry.put(toUserId, newFollowers)
@@ -68,9 +69,9 @@ object Main {
                   }
 
                 case "U" =>
-                  val fromUserId = nextMessage(2).toLong
-                  val toUserId = nextMessage(3).toLong
-                  val followers = followRegistry.getOrElse(toUserId, Set.empty)
+                  val fromUserId   = nextMessage(2).toLong
+                  val toUserId     = nextMessage(3).toLong
+                  val followers    = followRegistry.getOrElse(toUserId, Set.empty)
                   val newFollowers = followers - fromUserId
 
                   followRegistry.put(toUserId, newFollowers)
@@ -93,7 +94,7 @@ object Main {
 
                 case "S" =>
                   val fromUserId = nextMessage(2).toLong
-                  val followers = followRegistry.getOrElse(fromUserId, Set.empty)
+                  val followers  = followRegistry.getOrElse(fromUserId, Set.empty)
 
                   followers.foreach { follower =>
                     clientPool.get(follower).foreach { socket =>
@@ -116,13 +117,13 @@ object Main {
     val clientsAsync = Future {
 
       println(s"Listening for client requests on $ClientPort")
-      val serverSocket = new ServerSocket(ClientPort)
+      val serverSocket      = new ServerSocket(ClientPort)
       var maybeClientSocket = Option(serverSocket.accept())
 
       while (maybeClientSocket.nonEmpty) {
         maybeClientSocket.foreach { clientSocket =>
           val bufferedSource = Source.fromInputStream(clientSocket.getInputStream())
-          val userId = bufferedSource.bufferedReader().readLine()
+          val userId         = bufferedSource.bufferedReader().readLine()
 
           if (userId != null) {
             clientPool.put(userId.toLong, clientSocket)
@@ -137,4 +138,13 @@ object Main {
     Await.result(Future.sequence(Seq(eventsAsync, clientsAsync)), Duration.Inf)
   }
 
+}
+
+// TODO rename when removing previous Main version
+object MainV2 {
+
+  val config   = ConfigFactory.load()
+  val producer = kafkaProducer(config)
+
+  // TODO configure TCP server
 }
