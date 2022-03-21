@@ -1,13 +1,11 @@
 package com.soundcloud.maze.adapter.in.tcp
 
-import CommandParser.*
-
-import com.soundcloud.maze.domain.Command.*
-
-import org.scalatest.wordspec.AnyWordSpec
+import com.soundcloud.maze.adapter.in.tcp.CommandParser.parse
+import com.soundcloud.maze.domain.Command._
 import org.scalatest.matchers.must.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class CommandParserSpec extends AnyWordSpec with Matchers:
+class CommandParserSpec extends AnyWordSpec with Matchers {
 
   "parse Follow payload" in {
     val result = parse("666|F|60|50")
@@ -33,3 +31,4 @@ class CommandParserSpec extends AnyWordSpec with Matchers:
     val result = parse("634|S|32")
     result mustBe StatusUpdate(634, 32)
   }
+}
