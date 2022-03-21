@@ -9,6 +9,7 @@ val MockitoScalaVersion = "1.17.5"
 val ScalatestVersion    = "3.2.11"
 val KafkaClientVersion  = "2.8.0"
 val CirceVersion        = "0.14.1"
+val LogbackVersion      = "1.2.11"
 
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor-typed"     % AkkaVersion,
@@ -18,6 +19,7 @@ libraryDependencies ++= Seq(
   "io.circe"          %% "circe-parser"         % CirceVersion,
   "io.circe"          %% "circe-generic"        % CirceVersion,
   "io.circe"          %% "circe-generic-extras" % CirceVersion,
+  "ch.qos.logback"     % "logback-classic"      % LogbackVersion,
   // Test
   "org.scalatest"     %% "scalatest"           % ScalatestVersion    % Test,
   "org.mockito"       %% "mockito-scala"       % MockitoScalaVersion % Test,
