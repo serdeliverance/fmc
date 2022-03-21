@@ -1,9 +1,10 @@
 package com.soundcloud.maze.application
 
-import com.soundcloud.maze.common.ApplicationResult.ApplicationResult
+import com.soundcloud.maze.application.eventbus.EventBusProducer
+import com.soundcloud.maze.common.globals.ApplicationResult.ApplicationResult
 import com.soundcloud.maze.domain.Event
 
-class EventHandler(eventBus: EventBus) {
+class EventHandler(eventBus: EventBusProducer) {
 
   def handle(event: Event): ApplicationResult[Unit] =
     eventBus.publish(event)

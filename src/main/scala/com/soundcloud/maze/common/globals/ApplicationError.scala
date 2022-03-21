@@ -1,4 +1,4 @@
-package com.soundcloud.maze.common
+package com.soundcloud.maze.common.globals
 
 sealed trait ApplicationError
 

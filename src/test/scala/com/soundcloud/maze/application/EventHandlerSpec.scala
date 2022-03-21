@@ -1,7 +1,8 @@
 package com.soundcloud.maze.application
 
-import com.soundcloud.maze.common.ApplicationError.EventBusError
-import com.soundcloud.maze.common.ApplicationResult
+import com.soundcloud.maze.application.eventbus.EventBusProducer
+import com.soundcloud.maze.common.globals.ApplicationError.EventBusError
+import com.soundcloud.maze.common.globals.ApplicationResult
 import com.soundcloud.maze.domain.Event.Followed
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mockito.when
@@ -12,7 +13,7 @@ import org.scalatest.wordspec.AnyWordSpec
 
 class EventHandlerSpec extends AnyWordSpec with Matchers with ScalaFutures {
 
-  private val eventBus     = mock[EventBus]
+  private val eventBus     = mock[EventBusProducer]
   private val eventHandler = new EventHandler(eventBus)
 
   "publish event successfully" in {
