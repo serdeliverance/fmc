@@ -2,10 +2,10 @@ package com.soundcloud.maze.domain
 
 sealed trait Event
 
-object Event:
-  // TODO pasar todo a Long
-  case class Followed(seqNo: Int, fromUserId: Int, toUserId: Int)       extends Event
-  case class Unfollowed(seqNo: Int, fromUserId: Int, toUserId: Int)     extends Event
-  case class BroadcastSent(seqNo: Int)                                  extends Event
-  case class PrivateMsgSent(seqNo: Int, fromUserId: Int, toUserId: Int) extends Event
-  case class StatusUpdated(seqNo: Int, fromUserId: Int)                 extends Event
+object Event {
+  case class Followed(seqNo: Long, fromUserId: Long, toUserId: Long)       extends Event
+  case class Unfollowed(seqNo: Long, fromUserId: Long, toUserId: Long)     extends Event
+  case class BroadcastSent(seqNo: Long)                                    extends Event
+  case class PrivateMsgSent(seqNo: Long, fromUserId: Long, toUserId: Long) extends Event
+  case class StatusUpdated(seqNo: Long, fromUserId: Long)                  extends Event
+}

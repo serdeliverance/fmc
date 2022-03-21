@@ -1,15 +1,12 @@
-package com.soundcloud.maze.adapter.in.tcp
+package com.soundcloud.maze.application
 
-import CommandHandler.*
-
-import org.scalatest.wordspec.AnyWordSpec
+import com.soundcloud.maze.application.CommandHandler.handle
+import com.soundcloud.maze.domain.Command._
+import com.soundcloud.maze.domain.Event._
 import org.scalatest.matchers.must.Matchers
-import com.soundcloud.maze.domain.Command
-import com.soundcloud.maze.domain.Command.*
-import com.soundcloud.maze.domain.Event
-import com.soundcloud.maze.domain.Event.*
+import org.scalatest.wordspec.AnyWordSpec
 
-class CommandHandlerSpec extends AnyWordSpec with Matchers:
+class CommandHandlerSpec extends AnyWordSpec with Matchers {
   "handle Follow command" in {
     val result = handle(Follow(666, 60, 50))
     result mustBe Followed(666, 60, 50)
@@ -34,3 +31,4 @@ class CommandHandlerSpec extends AnyWordSpec with Matchers:
     val result = handle(StatusUpdate(634, 32))
     result mustBe StatusUpdated(634, 32)
   }
+}
