@@ -174,7 +174,7 @@ object Main extends App {
 
   val eventConnectionHandler: Flow[ByteString, ByteString, NotUsed] =
     Flow[ByteString]
-      .via(Framing.delimiter(ByteString(FileSystems.getDefault.getSeparator), 256, false))
+      .via(Framing.delimiter(ByteString(FileSystems.getDefault.getSeparator), 256, true))
       .map(_.utf8String)
       .log(name = "ut8String")                                                    // TODO fix
       .addAttributes(Attributes.logLevels(onElement = Attributes.LogLevels.Info)) // TODO remove
