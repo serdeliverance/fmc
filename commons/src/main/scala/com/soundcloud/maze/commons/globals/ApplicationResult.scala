@@ -4,7 +4,9 @@ import scala.concurrent.Future
 
 object ApplicationResult {
 
-  type ApplicationResult[T] = Future[Either[ApplicationError, T]]
+  type ApplicationResult[T] = Future[EitherResult[T]]
+
+  type EitherResult[T] = Either[ApplicationError, T]
 
   def apply[T](t: T): ApplicationResult[T] = Future.successful(Right(t))
 
