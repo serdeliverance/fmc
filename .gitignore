@@ -6,3 +6,4 @@ target/
 metals.sbt
 .idea
 .bsp/
+logs/
