@@ -2,25 +2,15 @@ package com.soundcloud.maze
 
 import akka.NotUsed
 import akka.actor.ActorSystem
-import akka.stream.Attributes
 import akka.stream.scaladsl.{ Flow, Framing, Tcp }
 import akka.util.ByteString
-import com.soundcloud.maze.adapter.in.tcp.EventParser.parseEvent
+import com.soundcloud.maze.adapter.in.tcp.EventParser
 import com.soundcloud.maze.application.EventHandler
-import com.soundcloud.maze.application.eventbus.KafkaEventBusProducer
+import com.soundcloud.maze.application.eventbus.KafkaEventBus
 import com.soundcloud.maze.commons.kafka.kafkaProducer
 import com.typesafe.config.ConfigFactory
 
-import java.io._
-import java.net.{ ServerSocket, Socket }
 import java.nio.file.FileSystems
-import scala.collection.JavaConverters._
-import scala.collection.concurrent.TrieMap
-import scala.collection.mutable
-import scala.concurrent.duration.Duration
-import scala.concurrent.{ Await, ExecutionContext, Future }
-import scala.io.Source
-import scala.util.Try
 
 /*
 object Main {
@@ -164,26 +154,27 @@ object Main extends App {
 
   implicit val system = ActorSystem("actor-system")
 
-  val eventBus     = new KafkaEventBusProducer(producer, topic)
+  val eventParser  = new EventParser()
+  val eventBus     = new KafkaEventBus(producer, topic)
   val eventHandler = new EventHandler(eventBus)
 
-  val eventChannelConnections =
+  val connections =
     Tcp().bind(host, port)
 
   val ackHandler = Flow[Any].map(_ => ByteString("ack"))
 
-  val eventConnectionHandler: Flow[ByteString, ByteString, NotUsed] =
+  val connectionHandler: Flow[ByteString, ByteString, NotUsed] =
     Flow[ByteString]
       .via(Framing.delimiter(ByteString(FileSystems.getDefault.getSeparator), 256, true))
-      .map(_.utf8String)
-      .log(name = "ut8String")                                                    // TODO fix
-      .addAttributes(Attributes.logLevels(onElement = Attributes.LogLevels.Info)) // TODO remove
-      .map(parseEvent)
+      .map(_.utf8String.trim)
+      .map(eventParser.parseEvent)
+      .collect { case Right(event) =>
+        event
+      }
       .mapAsync(4) { event => eventHandler.handle(event) }
-      // TODO add error handling and improve logging
       .via(ackHandler)
 
-  eventChannelConnections.runForeach { connection =>
-    connection.handleWith(eventConnectionHandler)
+  connections.runForeach { connection =>
+    connection.handleWith(connectionHandler)
   }
 }
