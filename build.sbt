@@ -60,4 +60,17 @@ lazy val eventProducerDependencies =
   )
 
 lazy val notificatorDependencies =
-  libraryDependencies ++= Seq("org.apache.kafka" % "kafka-clients" % KafkaClientVersion)
+  libraryDependencies ++= Seq(
+    "com.typesafe.akka" %% "akka-actor-typed"     % AkkaVersion,
+    "com.typesafe.akka" %% "akka-stream"          % AkkaVersion,
+    "org.apache.kafka"   % "kafka-clients"        % KafkaClientVersion,
+    "io.circe"          %% "circe-core"           % CirceVersion,
+    "io.circe"          %% "circe-parser"         % CirceVersion,
+    "io.circe"          %% "circe-generic"        % CirceVersion,
+    "io.circe"          %% "circe-generic-extras" % CirceVersion,
+    "ch.qos.logback"     % "logback-classic"      % LogbackVersion,
+    // Test
+    "org.scalatest"     %% "scalatest"           % ScalatestVersion    % Test,
+    "org.mockito"       %% "mockito-scala"       % MockitoScalaVersion % Test,
+    "com.typesafe.akka" %% "akka-stream-testkit" % AkkaVersion         % Test
+  )
