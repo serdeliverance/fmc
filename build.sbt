@@ -9,6 +9,7 @@ val AkkaVersion         = "2.6.18"
 val MockitoScalaVersion = "1.17.5"
 val ScalatestVersion    = "3.2.11"
 val KafkaClientVersion  = "2.8.0"
+val AlpakkaKafkaVersion = "3.0.0"
 val CirceVersion        = "0.14.1"
 val LogbackVersion      = "1.2.11"
 
@@ -63,7 +64,7 @@ lazy val notificatorDependencies =
   libraryDependencies ++= Seq(
     "com.typesafe.akka" %% "akka-actor-typed"     % AkkaVersion,
     "com.typesafe.akka" %% "akka-stream"          % AkkaVersion,
-    "org.apache.kafka"   % "kafka-clients"        % KafkaClientVersion,
+    "com.typesafe.akka" %% "akka-stream-kafka"    % AlpakkaKafkaVersion,
     "io.circe"          %% "circe-core"           % CirceVersion,
     "io.circe"          %% "circe-parser"         % CirceVersion,
     "io.circe"          %% "circe-generic"        % CirceVersion,

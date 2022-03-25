@@ -1,4 +1,4 @@
-package com.soundcloud.maze.domain
+package com.soundcloud.maze.domain.entities
 
 sealed trait Event
 
