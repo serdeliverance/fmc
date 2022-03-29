@@ -11,6 +11,7 @@ object Dependencies {
     val circeGenericsExtras = "0.14.1"
     val logbackVersion      = "1.2.11"
     val fs2Kafka            = "2.5.0-M2"
+    val redis4Cats          = "1.1.1"
 
     val scalatestVersion       = "3.2.11"
     val munitVersion           = "0.7.29"
@@ -26,6 +27,7 @@ object Dependencies {
   val circeGeneric       = "io.circe"          %% "circe-generic"        % V.circeVersion
   val circeGenericExtras = "io.circe"          %% "circe-generic-extras" % V.circeVersion
   val catsEffect         = "org.typelevel"     %% "cats-effect"          % V.catsEffectVersion
+  val redis4Cats         = "dev.profunktor"    %% "redis4cats-effects"   % V.redis4Cats
   val logbackClassic     = "ch.qos.logback"     % "logback-classic"      % V.logbackVersion
 
   val scalatest         = "org.scalatest"     %% "scalatest"           % V.scalatestVersion

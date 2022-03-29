@@ -61,4 +61,4 @@ lazy val eventProducerDependencies =
   )
 
 lazy val followerServiceDependencies =
-  libraryDependencies ++= Seq(fs2Kafka, catsEffect)
+  libraryDependencies ++= Seq(fs2Kafka, catsEffect, redis4Cats)
