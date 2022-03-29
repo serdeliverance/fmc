@@ -5,8 +5,7 @@ import fs2.kafka.KafkaConsumer
 import cats.effect.IO
 import fs2.kafka.ConsumerRecord
 import com.soundcloud.maze.domain.entities.Event
-import com.soundcloud.maze.commons.json._
-
+import com.soundcloud.maze.commons.json.Serdes._
 import io.circe.parser.decode
 
 object BrokerConsumer {

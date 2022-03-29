@@ -1,14 +1,6 @@
-import akka.NotUsed
-import akka.actor.ActorSystem
-import akka.stream.scaladsl.{ Flow, Framing, Tcp }
-import akka.util.ByteString
-import com.soundcloud.maze.commons.kafka.kafkaProducer
-import com.typesafe.config.ConfigFactory
-
-import java.nio.file.FileSystems
-
 object Main extends App {
 
+  /*
   val config   = ConfigFactory.load()
   val producer = kafkaProducer(config)
 
@@ -40,5 +32,5 @@ object Main extends App {
   connections.runForeach { connection =>
     connection.handleWith(connectionHandler)
   }
-
+   */
 }

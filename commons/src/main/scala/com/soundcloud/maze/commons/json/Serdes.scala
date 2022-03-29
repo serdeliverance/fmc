@@ -8,7 +8,7 @@ import io.circe.{ Decoder, Encoder, Printer }
 import com.soundcloud.maze.domain.entities.Event
 import com.soundcloud.maze.domain.entities.Event._
 
-object CirceImplicits {
+object Serdes {
 
   implicit val customPrinter: Printer      = Printer.noSpaces.copy(dropNullValues = true)
   implicit val customConfig: Configuration = Configuration.default.withKebabCaseMemberNames
