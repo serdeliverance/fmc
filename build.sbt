@@ -8,7 +8,9 @@ ThisBuild / organizationName := "serdeliverance"
 resolvers += "Confluent Repo" at "https://packages.confluent.io/maven"
 
 lazy val domain =
-  project.in(file("domain"))
+  project
+    .in(file("domain"))
+    .settings(domainDependencies)
 
 lazy val commons =
   project
@@ -22,11 +24,16 @@ lazy val `event-producer` =
     .settings(eventProducerDependencies)
     .dependsOn(domain, commons)
 
-lazy val notificator =
+lazy val `follower-service` =
   project
-    .in(file("notificator"))
-    .settings(notificatorDependencies)
+    .in(file("follower-service"))
+    .settings(followerServiceDependencies)
     .dependsOn(domain, commons)
+
+lazy val domainDependencies =
+  libraryDependencies ++= Seq(
+    catsEffect
+  )
 
 lazy val commonDependencies =
   libraryDependencies ++= Seq(
@@ -53,5 +60,5 @@ lazy val eventProducerDependencies =
     akkaStreamTestkit % Test
   )
 
-lazy val notificatorDependencies =
-  libraryDependencies ++= Seq(kafkaClient)
+lazy val followerServiceDependencies =
+  libraryDependencies ++= Seq(fs2Kafka, catsEffect, redis4Cats)

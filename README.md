@@ -22,6 +22,10 @@
 
 1. Understand de original code
 
+## Improvements
+
+- Retryable consumer on consumer side
+
 #########################
 
 Detalle
@@ -29,3 +33,12 @@ Detalle
 Se plantea una arquitectura Event Sourcing, separando comandos, de eventos de estado.
 
 Se definieron dichos comandos con sus correspondientes unit tests siguiendo un approach TDD. Dichos componentes fueron definidos en la capa de domain
+
+########################
+
+TODO
+
+- organizar build sbt: buscar una forma que las dependencias de event producer y notification esten mejor organizadas para no repertirse
+- diagramas en readme
+- agregar unit test
+- implementar segundo caso de uso

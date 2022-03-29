@@ -2,8 +2,8 @@ package com.soundcloud.maze.adapter.in.tcp
 
 import com.soundcloud.maze.commons.globals.ApplicationError.ParsingError
 import com.soundcloud.maze.commons.globals.ApplicationResult.EitherResult
-import com.soundcloud.maze.domain.Event
-import com.soundcloud.maze.domain.Event._
+import com.soundcloud.maze.domain.entities.Event._
+import com.soundcloud.maze.domain.entities.Event
 import org.slf4j.LoggerFactory
 
 import scala.util.Try

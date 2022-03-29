@@ -10,6 +10,8 @@ object Dependencies {
     val circeVersion        = "0.14.1"
     val circeGenericsExtras = "0.14.1"
     val logbackVersion      = "1.2.11"
+    val fs2Kafka            = "2.5.0-M2"
+    val redis4Cats          = "1.1.1"
 
     val scalatestVersion       = "3.2.11"
     val munitVersion           = "0.7.29"
@@ -19,17 +21,18 @@ object Dependencies {
   val akka               = "com.typesafe.akka" %% "akka-actor-typed"     % V.akkaVersion
   val akkaStream         = "com.typesafe.akka" %% "akka-stream"          % V.akkaVersion
   val kafkaClient        = "org.apache.kafka"   % "kafka-clients"        % V.kafkaClientVersion
+  val fs2Kafka           = "com.github.fd4s"   %% "fs2-kafka"            % V.fs2Kafka
   val circe              = "io.circe"          %% "circe-core"           % V.circeVersion
   val circeParser        = "io.circe"          %% "circe-parser"         % V.circeVersion
   val circeGeneric       = "io.circe"          %% "circe-generic"        % V.circeVersion
   val circeGenericExtras = "io.circe"          %% "circe-generic-extras" % V.circeVersion
-
-  val catsEffect       = "org.typelevel" %% "cats-effect"         % V.catsEffectVersion
-  val munit            = "org.scalameta" %% "munit"               % V.munitVersion
-  val munitCatsEffect3 = "org.typelevel" %% "munit-cats-effect-3" % V.munitCatsEffectVersion
-  val logbackClassic   = "ch.qos.logback" % "logback-classic"     % V.logbackVersion
+  val catsEffect         = "org.typelevel"     %% "cats-effect"          % V.catsEffectVersion
+  val redis4Cats         = "dev.profunktor"    %% "redis4cats-effects"   % V.redis4Cats
+  val logbackClassic     = "ch.qos.logback"     % "logback-classic"      % V.logbackVersion
 
   val scalatest         = "org.scalatest"     %% "scalatest"           % V.scalatestVersion
   val mockitoScala      = "org.mockito"       %% "mockito-scala"       % V.mockitoScalaVersion
   val akkaStreamTestkit = "com.typesafe.akka" %% "akka-stream-testkit" % V.akkaVersion
+  val munit             = "org.scalameta"     %% "munit"               % V.munitVersion
+  val munitCatsEffect3  = "org.typelevel"     %% "munit-cats-effect-3" % V.munitCatsEffectVersion
 }
