@@ -1,4 +1,9 @@
-package com.soundcloud.maze.domain.services
+package com.soundcloud.maze.application.ports.out
 
-// TODO refactor move to port layer
-trait FollowerRepository {}
+import cats.effect.IO
+
+trait FollowerRepository {
+  def isFollowedBy(followedId: Long, followerId: Long): IO[Boolean]
+
+  def addFollower(followedId: Long, followerId: Long): IO[Unit]
+}
