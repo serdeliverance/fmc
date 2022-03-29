@@ -3,7 +3,7 @@ package com.soundcloud.maze.application.eventbus
 import com.soundcloud.maze.commons.globals.ApplicationError
 import com.soundcloud.maze.commons.globals.ApplicationError.EventBusError
 import com.soundcloud.maze.commons.globals.ApplicationResult.ApplicationResult
-import com.soundcloud.maze.commons.json.CirceImplicits.eventEncoder
+import com.soundcloud.maze.commons.json.Serdes.eventEncoder
 import com.soundcloud.maze.domain.entities.Event
 import io.circe.syntax._
 import org.apache.kafka.clients.producer.{ Callback, KafkaProducer, ProducerRecord, RecordMetadata }
