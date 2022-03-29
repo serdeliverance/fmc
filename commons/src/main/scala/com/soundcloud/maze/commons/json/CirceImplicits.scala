@@ -35,6 +35,7 @@ object CirceImplicits {
     case privateMsgSent @ PrivateMsg(_, _, _) => privateMsgSent.asJson
     case statusUpdated @ StatusUpdate(_, _)   => statusUpdated.asJson
   }
+
   implicit val eventDecoder: Decoder[Event] =
     List[Decoder[Event]](
       Decoder[Follow].widen,
