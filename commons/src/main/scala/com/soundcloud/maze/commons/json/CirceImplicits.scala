@@ -1,12 +1,12 @@
 package com.soundcloud.maze.commons.json
 
 import cats.syntax.functor._
-import com.soundcloud.maze.domain.Event._
-import com.soundcloud.maze.domain.entities.Event
 import io.circe.generic.extras.Configuration
 import io.circe.generic.extras.semiauto.{ deriveConfiguredDecoder, deriveConfiguredEncoder }
 import io.circe.syntax._
 import io.circe.{ Decoder, Encoder, Printer }
+import com.soundcloud.maze.domain.entities.Event
+import com.soundcloud.maze.domain.entities.Event._
 
 object CirceImplicits {
 

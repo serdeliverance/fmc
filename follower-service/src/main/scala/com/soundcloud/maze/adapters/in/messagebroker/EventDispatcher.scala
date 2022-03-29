@@ -1,12 +1,10 @@
+package com.soundcloud.maze.adapters.in.messagebroker
+
 import com.soundcloud.maze.commons.globals.ApplicationResult.ApplicationResult
 import com.soundcloud.maze.domain.entities.Event
 import com.soundcloud.maze.domain.entities.Event._
 
-class EventDispatcher(
-    userRepository: UserRepository,
-    sessionManagerService: SessionManagerService,
-    notificationService: NotificationService
-) {
+class EventDispatcher {
 
   // TODO
   def dispatch(event: Event): ApplicationResult[Unit] = event match {

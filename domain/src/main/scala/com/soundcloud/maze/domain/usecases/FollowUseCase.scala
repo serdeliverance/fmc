@@ -1,11 +1,7 @@
 package com.soundcloud.maze.domain.usecases
 
-import com.soundcloud.maze.domain.entities.{ User, UserRepository }
+import cats.effect.IO
 
-import scala.concurrent.Future
-
-class FollowUseCase(userRepository: UserRepository) {
-
-  def follow(user: User, followed: User): Future[Unit] =
-    userRepository.
+trait FollowUseCase {
+  def follow(followerId: Long, followedId: Long): IO[Unit]
 }
