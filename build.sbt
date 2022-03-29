@@ -28,10 +28,10 @@ lazy val `event-producer` =
     .settings(eventProducerDependencies)
     .dependsOn(domain, commons)
 
-lazy val notificator =
+lazy val `event-consumer` =
   project
-    .in(file("notificator"))
-    .settings(notificatorDependencies)
+    .in(file("event-consumer"))
+    .settings(eventConsumerDependencies)
     .dependsOn(domain, commons)
 
 lazy val commonDependencies =
@@ -60,16 +60,13 @@ lazy val eventProducerDependencies =
     "com.typesafe.akka" %% "akka-stream-testkit" % AkkaVersion         % Test
   )
 
-lazy val notificatorDependencies =
+lazy val eventConsumerDependencies =
   libraryDependencies ++= Seq(
-    "com.typesafe.akka" %% "akka-actor-typed"     % AkkaVersion,
-    "com.typesafe.akka" %% "akka-stream"          % AkkaVersion,
-    "com.typesafe.akka" %% "akka-stream-kafka"    % AlpakkaKafkaVersion,
-    "io.circe"          %% "circe-core"           % CirceVersion,
-    "io.circe"          %% "circe-parser"         % CirceVersion,
-    "io.circe"          %% "circe-generic"        % CirceVersion,
-    "io.circe"          %% "circe-generic-extras" % CirceVersion,
-    "ch.qos.logback"     % "logback-classic"      % LogbackVersion,
+    "io.circe"      %% "circe-core"           % CirceVersion,
+    "io.circe"      %% "circe-parser"         % CirceVersion,
+    "io.circe"      %% "circe-generic"        % CirceVersion,
+    "io.circe"      %% "circe-generic-extras" % CirceVersion,
+    "ch.qos.logback" % "logback-classic"      % LogbackVersion,
     // Test
     "org.scalatest"     %% "scalatest"           % ScalatestVersion    % Test,
     "org.mockito"       %% "mockito-scala"       % MockitoScalaVersion % Test,
