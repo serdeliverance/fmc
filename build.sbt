@@ -61,4 +61,11 @@ lazy val eventProducerDependencies =
   )
 
 lazy val followerServiceDependencies =
-  libraryDependencies ++= Seq(fs2Kafka, catsEffect, redis4Cats)
+  libraryDependencies ++= Seq(
+    fs2Kafka,
+    catsEffect,
+    redis4Cats,
+    mockitoScala     % Test,
+    munit            % Test,
+    munitCatsEffect3 % Test
+  )

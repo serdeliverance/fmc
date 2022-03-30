@@ -11,23 +11,25 @@ class FollowUseCaseService(
     notificationService: NotificationService
 ) extends FollowUseCase {
 
-  // TODO change firm parameter names (follower vs followed) to be more readable and avoid confusion
-  override def follow(seqNo: Long, followerId: Long, followedId: Long): IO[Unit] =
+  override def follow(followerId: Long, followedUserId: Long): IO[Unit] =
     followerRepository
-      .isFollowedBy(followedId, followerId)
+      .isFollowedBy(followedUserId, followerId)
       .flatMap { isFollowed =>
         if (isFollowed) IO.pure(())
-        else doFollow(followerId, followedId)
+        else doFollow(followerId, followedUserId)
       }
 
   // TODO add loggin
-  private def doFollow(followerId: Long, followedId: Long): IO[Unit] =
+  private def doFollow(newFollower: Long, followedUserId: Long): IO[Unit] =
     for {
-      _            <- followerRepository.addFollower(followedId, followerId)
-      maybeSession <- sessionRepository.getByUserId(followedId)
+      _            <- followerRepository.addFollower(followedUserId, newFollower)
+      maybeSession <- sessionRepository.getByUserId(followedUserId)
       _ <- maybeSession match {
-        case Some(session) => notificationService.notify(session.address, "") // TODO define message (maybe in a method)
-        case None          => IO.pure(())
+        case Some(session) =>
+          notificationService.notify(session.address, message(followedUserId))
+        case None => IO.pure(())
       }
     } yield ()
+
+  private def message(followerId: Long) = s"User ${followerId} started following you"
 }
