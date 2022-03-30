@@ -1,5 +1,5 @@
 package com.soundcloud.maze.domain.entities
 
-case class Session(id: Option[Long], userId: Long, connection: ConnectionData)
+case class Session(id: Option[Long], userId: Long, address: Address)
 
-case class ConnectionData(ip: String, port: Int)
+case class Address(ip: String, port: Int)

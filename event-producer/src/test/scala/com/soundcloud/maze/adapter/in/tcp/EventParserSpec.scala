@@ -1,7 +1,8 @@
 package com.soundcloud.maze.adapter.in.tcp
 
 import com.soundcloud.maze.commons.globals.ApplicationError.ParsingError
-import com.soundcloud.maze.domain.Event._
+import com.soundcloud.maze.domain.entities.Event._
+import com.soundcloud.maze.domain.entities.Event
 import org.scalatest.matchers.must.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
