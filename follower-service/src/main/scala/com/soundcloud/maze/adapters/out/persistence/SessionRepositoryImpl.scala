@@ -12,9 +12,8 @@ class SessionServiceImpl(redisCommand: Resource[IO, RedisCommands[IO, String, St
   override def create(session: Session): IO[Session] =
     redisCommand.use { redis =>
       for {
-        uuid <- IO.pure(UUID.randomUUID())
-        _    <- redis.hSet(uuid.toString, session.toMap)
-      } yield (session.copy(id = Some(uuid)))
+        _ <- redis.hSet(session.id, session.toMap)
+      } yield (session)
     }
 
   override def getByUserId(userId: Long): IO[Option[Session]] = ???
