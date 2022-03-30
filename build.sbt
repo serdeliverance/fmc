@@ -30,6 +30,12 @@ lazy val `follower-service` =
     .settings(followerServiceDependencies)
     .dependsOn(domain, commons)
 
+lazy val playground =
+  project
+    .in(file("playground"))
+    .settings(playgroundDependencies)
+    .dependsOn(domain, commons)
+
 lazy val domainDependencies =
   libraryDependencies ++= Seq(
     catsEffect
@@ -68,4 +74,9 @@ lazy val followerServiceDependencies =
     mockitoScala     % Test,
     munit            % Test,
     munitCatsEffect3 % Test
+  )
+
+lazy val playgroundDependencies =
+  libraryDependencies ++= Seq(
+    redis4Cats
   )
