@@ -8,14 +8,15 @@ import cats.effect.IO
 import com.soundcloud.maze.application.ports.out.{ FollowerRepository, NotificationService, SessionRepository }
 import com.soundcloud.maze.domain.entities.Session
 import com.soundcloud.maze.application.stubs.DomainStubs
+import com.soundcloud.maze.application.FollowService._
 
-class FollowUseCaseServiceSpec extends CatsEffectSuite with MockitoSugar with DomainStubs {
+class FollowServiceSpec extends CatsEffectSuite with MockitoSugar with DomainStubs {
 
   private val followerRepository  = mock[FollowerRepository]
   private val sessionRepository   = mock[SessionRepository]
   private val notificationService = mock[NotificationService]
 
-  private val subject = new FollowUseCaseService(followerRepository, sessionRepository, notificationService)
+  private val subject = new FollowService(followerRepository, sessionRepository, notificationService)
 
   test("follow a user") {
     // given
@@ -28,7 +29,7 @@ class FollowUseCaseServiceSpec extends CatsEffectSuite with MockitoSugar with Do
     when(notificationService.notify(any(), any())).thenReturn(IO.pure(()))
     // when
 
-    val result = subject.follow(2, 1)
+    val result = subject.followUpdate(2, 1, Follow)
 
     // then
     assertIO(result, ())
@@ -47,7 +48,7 @@ class FollowUseCaseServiceSpec extends CatsEffectSuite with MockitoSugar with Do
     when(followerRepository.isFollowedBy(2, 1)).thenReturn(IO.pure(true))
     // when
 
-    val result = subject.follow(1, 2)
+    val result = subject.followUpdate(1, 2, Follow)
 
     // then
     assertIO(result, ())
