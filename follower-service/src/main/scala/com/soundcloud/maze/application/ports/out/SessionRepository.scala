@@ -2,10 +2,11 @@ package com.soundcloud.maze.application.ports.out
 
 import cats.effect.IO
 import com.soundcloud.maze.domain.entities.Session
+import java.util.UUID
 
 trait SessionRepository {
 
   def create(session: Session): IO[Session]
   def getByUserId(userId: Long): IO[Option[Session]]
-  def delete(sessionId: Long): IO[Unit]
+  def delete(sessionId: Long): IO[UUID]
 }

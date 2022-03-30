@@ -16,6 +16,13 @@ class SessionServiceImpl(redisCommand: Resource[IO, RedisCommands[IO, String, St
         _    <- redis.hSet(uuid.toString, session.toMap)
       } yield (session.copy(id = Some(uuid)))
     }
-  override def delete(sessionId: Long): IO[Unit]              = ???
+
   override def getByUserId(userId: Long): IO[Option[Session]] = ???
+
+  override def delete(sessionId: UUID): IO[Unit] =
+    redisCommand
+      .use { redis =>
+        redis.del(sessionId.toString)
+      }
+      .as(())
 }
