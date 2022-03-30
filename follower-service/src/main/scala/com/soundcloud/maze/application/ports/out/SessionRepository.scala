@@ -8,5 +8,5 @@ trait SessionRepository {
 
   def create(session: Session): IO[Session]
   def getByUserId(userId: Long): IO[Option[Session]]
-  def delete(sessionId: Long): IO[UUID]
+  def delete(sessionId: UUID): IO[Unit]
 }
