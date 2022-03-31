@@ -9,6 +9,9 @@ import dev.profunktor.redis4cats.RedisCommands
 import java.util.UUID
 
 class SessionServiceImpl(redisCommand: Resource[IO, RedisCommands[IO, String, String]]) extends SessionRepository {
+
+  override def getAll(): IO[List[Session]] = ???
+
   override def create(session: Session): IO[Session] =
     redisCommand.use { redis =>
       for {
