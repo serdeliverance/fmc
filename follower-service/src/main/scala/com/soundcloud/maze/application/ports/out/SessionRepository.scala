@@ -6,6 +6,7 @@ import java.util.UUID
 
 trait SessionRepository {
 
+  def getAll(): IO[List[Session]]
   def create(session: Session): IO[Session]
   def getByUserId(userId: Long): IO[Option[Session]]
   def delete(sessionId: UUID): IO[Unit]
