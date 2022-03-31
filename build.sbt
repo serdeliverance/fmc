@@ -5,6 +5,8 @@ ThisBuild / version          := "0.1.0"
 ThisBuild / organization     := "io.serdeliverance"
 ThisBuild / organizationName := "serdeliverance"
 
+ThisBuild / libraryDependencySchemes += "org.typelevel" %% "cats-effect" % "always"
+
 resolvers += "Confluent Repo" at "https://packages.confluent.io/maven"
 
 lazy val domain =
@@ -71,6 +73,7 @@ lazy val followerServiceDependencies =
     fs2Kafka,
     catsEffect,
     redis4Cats,
+    quillJdbcMonix,
     mockitoScala     % Test,
     munit            % Test,
     munitCatsEffect3 % Test
@@ -78,5 +81,6 @@ lazy val followerServiceDependencies =
 
 lazy val playgroundDependencies =
   libraryDependencies ++= Seq(
-    redis4Cats
+    redis4Cats,
+    quillJdbcMonix
   )

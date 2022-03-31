@@ -3,15 +3,16 @@ import sbt._
 object Dependencies {
 
   object V {
-    val akkaVersion         = "2.6.18"
-    val catsEffectVersion   = "3.3.9"
-    val mockitoScalaVersion = "1.17.5"
-    val kafkaClientVersion  = "2.8.0"
-    val circeVersion        = "0.14.1"
-    val circeGenericsExtras = "0.14.1"
-    val logbackVersion      = "1.2.11"
-    val fs2Kafka            = "2.5.0-M2"
-    val redis4Cats          = "1.1.1"
+    val akkaVersion           = "2.6.18"
+    val catsEffectVersion     = "3.3.9"
+    val mockitoScalaVersion   = "1.17.5"
+    val kafkaClientVersion    = "2.8.0"
+    val circeVersion          = "0.14.1"
+    val circeGenericsExtras   = "0.14.1"
+    val logbackVersion        = "1.2.11"
+    val fs2Kafka              = "2.5.0-M2"
+    val redis4Cats            = "1.1.1"
+    val quillJdbcMonixVersion = "3.16.3"
 
     val scalatestVersion       = "3.2.11"
     val munitVersion           = "0.7.29"
@@ -35,4 +36,6 @@ object Dependencies {
   val akkaStreamTestkit = "com.typesafe.akka" %% "akka-stream-testkit" % V.akkaVersion
   val munit             = "org.scalameta"     %% "munit"               % V.munitVersion
   val munitCatsEffect3  = "org.typelevel"     %% "munit-cats-effect-3" % V.munitCatsEffectVersion
+  val quillJdbcMonix    = "io.getquill"       %% "quill-jdbc-monix"    % V.quillJdbcMonixVersion
+
 }
