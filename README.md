@@ -14,7 +14,17 @@
 
 - Too low level
 
-## Approach
+## Solution
+
+### High level architecture
+
+![Alt text](diagrams/architecture.png?raw=true "Architecture")
+
+`TODO TODO TODO`
+
+![Alt text](diagrams/follower-service.png?raw=true "Architecture")
+
+`TODO TODO TODO`
 
 ### Pre steps
 
@@ -22,9 +32,14 @@
 
 1. Understand de original code
 
-## Improvements
+
+
+
+## Future improvements
 
 - Retryable consumer on consumer side
+
+- Adding e2e testing (maybe with cypress)
 
 #########################
 
