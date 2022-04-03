@@ -26,34 +26,20 @@
 
 `TODO TODO TODO`
 
-### Pre steps
+### TODO
 
-0. Run the test to see everything is OK
+---- Critical
 
-1. Understand de original code
+- persistence layer
+- redis session manager => terminar de implementar SessionRepositoryImpl
+- fix tests
+- business logic
+- tcp server
+- plug everything
+- logging
 
+---- Bonus
 
-
-
-## Future improvements
-
-- Retryable consumer on consumer side
-
-- Adding e2e testing (maybe with cypress)
-
-#########################
-
-Detalle
-
-Se plantea una arquitectura Event Sourcing, separando comandos, de eventos de estado.
-
-Se definieron dichos comandos con sus correspondientes unit tests siguiendo un approach TDD. Dichos componentes fueron definidos en la capa de domain
-
-########################
-
-TODO
-
-- organizar build sbt: buscar una forma que las dependencias de event producer y notification esten mejor organizadas para no repertirse
-- diagramas en readme
-- agregar unit test
-- implementar segundo caso de uso
+- kubernetes
+- unit testing
+- refactor to Scala 3
